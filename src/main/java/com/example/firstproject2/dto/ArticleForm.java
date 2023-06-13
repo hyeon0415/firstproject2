@@ -1,5 +1,7 @@
 package com.example.firstproject2.dto;
 
+import com.example.firstproject2.entity.Article;
+
 public class ArticleForm {
 
     private String title;
@@ -16,5 +18,9 @@ public class ArticleForm {
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 '}';
+    }
+
+    public Article toEntity() {
+        return new Article(null, title, content);
     }
 }
