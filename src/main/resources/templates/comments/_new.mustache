@@ -35,11 +35,27 @@
         const comment = {
             nickname: document.querySelector("#new-comment-nickname").value,
             body : document.querySelector("#new-comment-body").value,
-            articleId: document.querySelector("#new-comment-article-id").value
+            article_id: document.querySelector("#new-comment-article-id").value
         };
 
         // 댓글 객체 출력
         console.log(comment);
+
+        // fetch() - Talend API 요청을 JS로 보내준다
+        const url = "/api/articles/" + comment.article_id + "/comments";
+        fetch(url, {
+            method: "post",
+            body: JSON.stringify(comment), // comment JS 객체를 JSON으로 변경하여 보냄
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            // http 응답 코드에 따른 메세지 출력
+            const msg = (response.ok) ? "댓글이 등록되었습니다." : "댓글 등록 실패..!";
+            alert(msg);
+            // 현재 페이지 새로고침
+            window.location.reload();
+        });
     });
 }
 </script>
